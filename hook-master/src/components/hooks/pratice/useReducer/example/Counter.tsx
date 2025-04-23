@@ -1,4 +1,7 @@
 export default function Counter() {
+  {
+    /** */
+  }
   return (
     <div className="space-y-4">
       <div className="text-center">
