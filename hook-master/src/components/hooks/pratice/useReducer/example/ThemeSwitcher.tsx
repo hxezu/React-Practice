@@ -1,3 +1,6 @@
+import { useReducer } from "react";
+import { ThemeSwitcherReducer } from "../reducer/ThemeSwitcherReducer";
+
 const themes = [
   { name: "Light", bg: "bg-gray-100", text: "text-gray-800" },
   { name: "Dark", bg: "bg-gray-800", text: "text-white" },
@@ -6,7 +9,7 @@ const themes = [
 ];
 
 export default function ThemeSwitcher() {
-  const currentTheme = 0;
+  const [currentTheme, dispatch] = useReducer(ThemeSwitcherReducer, 0);
   const message = "Hello, World!";
   const theme = themes[currentTheme];
 
@@ -23,7 +26,10 @@ export default function ThemeSwitcher() {
 
         <div className="text-center text-xl font-semibold">{message}</div>
 
-        <button className="w-full px-4 py-2 bg-white text-gray-800 rounded hover:bg-gray-100 transition-colors">
+        <button
+          onClick={() => dispatch({ type: "NEXT" })}
+          className="w-full px-4 py-2 bg-white text-gray-800 rounded hover:bg-gray-100 transition-colors"
+        >
           Switch Theme
         </button>
       </div>
