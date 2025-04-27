@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import PublicOnlyRoute from "./components/PublicOnlyRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
 
           <Route element={<PublicOnlyRoute />}>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Route>
 
           <Route element={<ProtectedRoute />}>

@@ -1,12 +1,21 @@
 import { Link, useNavigate } from "react-router";
 import { useAuthStore } from "../stores/authStore";
+import { axiosInstance } from "../api/axios";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const loginHandler = async () => {
-    login("accesstoken");
+    const { data } = await axiosInstance.post("/login", {
+      email: email,
+      password: password,
+    });
+    login(data.token);
+    console.log(data.token);
     navigate("/");
   };
   return (
@@ -43,6 +52,8 @@ export default function Login() {
                     id="email"
                     name="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     placeholder="your@email.com"
                   />
@@ -62,6 +73,8 @@ export default function Login() {
                     id="password"
                     name="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={`appearance-none block w-full pl-10 pr-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     placeholder="••••••••"
                   />
